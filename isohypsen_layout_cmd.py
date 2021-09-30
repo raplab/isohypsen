@@ -64,8 +64,9 @@ def layout_curves(surface_unsorted, perimeter, kadaster):
                     if top_border:
                         # add layer information and labels
                         id = str(i + 1) + "." + str(ij) + "/" + str(i) + "." + str(ij)
-
-                        label_point = qs.circle_of_inaccessibility(top_border, 5.0)
+                        if len(top_border) >1:
+                            top_border = largest_polygon(top_border)
+                        label_point = qs.circle_of_inaccessibility(top_border[0], 5.0)
 
                         font = ["SLF-RHN Architect", "RhSS"]
                         label = rs.AddText(id, label_point, 1, font[0], 0, 2)
@@ -97,6 +98,13 @@ def layout_curves(surface_unsorted, perimeter, kadaster):
             except:
                 pass
 
+def largest_polygon(polygon):
+    polygon_area = {}
+    for p in polygon:
+            area = rs.CurveArea(p)
+            polygon_area[p] = area
+    polygon = max(polygon_area, key=polygon_area.get)
+    return [polygon]
 
 def ccx_split(curves, boundary, last):
     """
@@ -199,4 +207,5 @@ def RunCommand( is_interactive ):
     
     return 0
 
-#RunCommand(True)
+
+RunCommand(True)

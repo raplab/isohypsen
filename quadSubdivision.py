@@ -91,7 +91,7 @@ class Cell:
         return quad_weight
 
 
-def circle_of_inaccessibility(polygon, tolerance=1.0):
+def circle_of_inaccessibility(polygons, tolerance=1.0):
     """
     find largest inscribed circle of any polygon or closed curve
     :param polygon: polygon or curve object
