@@ -208,4 +208,4 @@ def RunCommand( is_interactive ):
     return 0
 
 
-RunCommand(True)
+#RunCommand(True)
